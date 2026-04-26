@@ -3,7 +3,7 @@ import EmployeePanel from "./EmployeePanel";
 
 export default function OouiDemo({ employees, actions }) {
   const [selectedId, setSelectedId] = useState(employees[0]?.id ?? "");
-  const [lastAction, setLastAction] = useState("操作履歴はありません");
+  const [lastAction, setLastAction] = useState("部署変更は未実行です");
 
   const selectedEmployee = useMemo(
     () => employees.find((item) => item.id === selectedId) ?? employees[0],
@@ -35,14 +35,16 @@ export default function OouiDemo({ employees, actions }) {
       <div className="stack">
         <EmployeePanel employee={selectedEmployee} title="従業員詳細" />
         <section className="panel">
-          <h3>実行可能な処理</h3>
+          <h3>部署変更</h3>
           <div className="action-row">
             {actions.map((action) => (
               <button
                 type="button"
                 key={action}
                 onClick={() =>
-                  setLastAction(`${selectedEmployee?.name ?? "該当従業員"}: 「${action}」を実行しました`)
+                  setLastAction(
+                    `${selectedEmployee?.name ?? "該当従業員"}: 部署変更を完了しました`,
+                  )
                 }
               >
                 {action}

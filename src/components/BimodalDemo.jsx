@@ -42,17 +42,17 @@ export default function BimodalDemo({ employees, template }) {
 
         {!wizardOpen ? (
           <section className="panel">
-            <h3>関連手続き</h3>
+            <h3>部署変更手続き</h3>
             <p>
-              {selectedEmployee?.name} の年末調整申請を開始します。
+              {selectedEmployee?.name} の部署変更を手順に沿って処理します。
             </p>
             <button type="button" className="primary" onClick={() => setWizardOpen(true)}>
-              年末調整申請を開始
+              部署変更フローを開始
             </button>
           </section>
         ) : (
           <WizardShell
-            title={`${template.title}申請`}
+            title={template.title}
             steps={template.steps}
             currentStep={step}
             onPrev={() => setStep((prev) => Math.max(prev - 1, 0))}
@@ -61,11 +61,11 @@ export default function BimodalDemo({ employees, template }) {
           >
             {step < template.steps.length - 1 ? (
               <p className="event-log">
-                {selectedEmployee?.name} の「{template.steps[step]}」を入力中です。
+                {selectedEmployee?.name} の部署変更を「{template.steps[step]}」で処理中です。
               </p>
             ) : (
               <div className="confirm-box">
-                <p>申請が完了しました。従業員詳細へ戻ります。</p>
+                <p>部署変更が完了しました。従業員詳細へ戻ります。</p>
                 <button type="button" onClick={closeWizard}>
                   従業員詳細へ戻る
                 </button>

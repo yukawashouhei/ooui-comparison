@@ -7,18 +7,18 @@ export const appMeta = {
 export const modeOptions = [
   {
     id: "ooui",
-    label: "従業員管理",
-    summary: "一覧から対象を選択して詳細と操作を管理",
+    label: "OOUI（従業員管理）",
+    summary: "従業員を選択して部署変更を実行",
   },
   {
     id: "task",
-    label: "手続き管理",
-    summary: "申請手続きをステップ形式で処理",
+    label: "タスク志向UI（手続き管理）",
+    summary: "部署変更を手順に沿って処理",
   },
   {
     id: "bimodal",
-    label: "統合運用",
-    summary: "従業員管理と手続き処理を連携して運用",
+    label: "バイモーダルUI（統合運用）",
+    summary: "一覧操作と手順処理を組み合わせて完了",
   },
 ];
 
@@ -32,7 +32,7 @@ export const employeeRecords = [
     contractType: "正社員",
     startedAt: "2022-04-01",
     docs: ["雇用契約書", "扶養控除等申告書"],
-    pendingTasks: ["2026年 年末調整未提出"],
+    pendingTasks: ["部署変更申請の承認待ち"],
   },
   {
     id: "emp-002",
@@ -43,7 +43,7 @@ export const employeeRecords = [
     contractType: "正社員",
     startedAt: "2021-10-01",
     docs: ["雇用契約書", "評価シート 2025"],
-    pendingTasks: ["入社情報更新チェック"],
+    pendingTasks: ["部署変更差分の確認待ち"],
   },
   {
     id: "emp-003",
@@ -54,33 +54,29 @@ export const employeeRecords = [
     contractType: "正社員",
     startedAt: "2020-07-15",
     docs: ["雇用契約書", "休職届"],
-    pendingTasks: ["復職面談日程の設定"],
+    pendingTasks: ["部署変更対象の最終確認"],
   },
 ];
 
 export const objectActions = [
-  "部署変更",
-  "契約更新",
-  "書類発行",
-  "年末調整リマインド送信",
+  "部署変更を保存",
 ];
 
 export const taskFlowTemplates = [
   {
-    id: "onboarding",
-    title: "入社手続き",
-    steps: ["基本情報", "必要書類", "最終確認", "完了"],
+    id: "dept-change-task",
+    title: "部署変更フロー",
+    steps: ["対象確認", "新部署選択", "変更内容確認", "完了"],
   },
   {
-    id: "year-end",
-    title: "年末調整",
-    steps: ["本人情報", "控除入力", "確認", "提出完了"],
+    id: "dept-change-bimodal",
+    title: "部署変更フロー",
+    steps: ["対象確認", "新部署選択", "変更内容確認", "完了"],
   },
 ];
 
 export const defaultFormState = {
   employeeName: "",
-  department: "人事部",
-  procedureType: "入社手続き",
-  needsDocs: true,
+  currentDepartment: "人事部",
+  newDepartment: "営業部",
 };

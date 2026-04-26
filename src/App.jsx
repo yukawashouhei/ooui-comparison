@@ -34,6 +34,7 @@ export default function App() {
       <header className="app-header">
         <h1>{appMeta.title}</h1>
         <p className="subtitle">{appMeta.subtitle}</p>
+        <p className="description">同一タスク: 従業員の部署変更を3方式で比較</p>
       </header>
 
       <ModeSwitcher options={modeOptions} activeMode={activeMode} onChange={setActiveMode} />

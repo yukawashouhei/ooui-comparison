@@ -6,7 +6,7 @@ function StepContent({ stepIndex, formState, setFormState }) {
     return (
       <div className="form-grid">
         <label>
-          対象従業員名
+          対象従業員
           <input
             value={formState.employeeName}
             onChange={(event) =>
@@ -16,17 +16,8 @@ function StepContent({ stepIndex, formState, setFormState }) {
           />
         </label>
         <label>
-          手続き種別
-          <select
-            value={formState.procedureType}
-            onChange={(event) =>
-              setFormState((prev) => ({ ...prev, procedureType: event.target.value }))
-            }
-          >
-            <option>入社手続き</option>
-            <option>年末調整</option>
-            <option>雇用契約更新</option>
-          </select>
+          現在の部署
+          <input value={formState.currentDepartment} readOnly />
         </label>
       </div>
     );
@@ -36,27 +27,18 @@ function StepContent({ stepIndex, formState, setFormState }) {
     return (
       <div className="form-grid">
         <label>
-          所属部署
+          変更後の部署
           <select
-            value={formState.department}
+            value={formState.newDepartment}
             onChange={(event) =>
-              setFormState((prev) => ({ ...prev, department: event.target.value }))
+              setFormState((prev) => ({ ...prev, newDepartment: event.target.value }))
             }
           >
             <option>人事部</option>
             <option>営業部</option>
             <option>開発部</option>
+            <option>経営企画部</option>
           </select>
-        </label>
-        <label className="checkbox-row">
-          <input
-            type="checkbox"
-            checked={formState.needsDocs}
-            onChange={(event) =>
-              setFormState((prev) => ({ ...prev, needsDocs: event.target.checked }))
-            }
-          />
-          添付書類チェックを有効にする
         </label>
       </div>
     );
@@ -65,18 +47,17 @@ function StepContent({ stepIndex, formState, setFormState }) {
   if (stepIndex === 2) {
     return (
       <div className="confirm-box">
-        <p>以下の内容で手続きを進めます。</p>
+        <p>以下の内容で部署変更を反映します。</p>
         <ul>
-          <li>対象: {formState.employeeName || "未入力"}</li>
-          <li>手続き種別: {formState.procedureType}</li>
-          <li>部署: {formState.department}</li>
-          <li>添付確認: {formState.needsDocs ? "必要" : "不要"}</li>
+          <li>対象従業員: {formState.employeeName || "未入力"}</li>
+          <li>変更前部署: {formState.currentDepartment}</li>
+          <li>変更後部署: {formState.newDepartment}</li>
         </ul>
       </div>
     );
   }
 
-  return <p className="done-message">申請を受け付けました。処理状況に反映されています。</p>;
+  return <p className="done-message">部署変更が完了しました。従業員情報に反映済みです。</p>;
 }
 
 export default function TaskFlowDemo({ template, initialFormState }) {
@@ -92,7 +73,7 @@ export default function TaskFlowDemo({ template, initialFormState }) {
 
   return (
     <WizardShell
-      title={`${template.title}申請`}
+      title={template.title}
       steps={template.steps}
       currentStep={step}
       onPrev={goPrev}
